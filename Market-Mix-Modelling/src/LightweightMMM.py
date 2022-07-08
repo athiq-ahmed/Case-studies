@@ -6,22 +6,24 @@ import pandas as pd
 from lightweight_mmm import preprocessing, lightweight_mmm, plot, optimize_media
 import jax.numpy as jnp
 from sklearn.metrics import mean_absolute_error
+from tabulate import tabulate
 
-pd.set_option('display.max_columns', None)
-pd.set_option('display.max_rows', None)
-pd.set_option('display.width', -1)
-# pd.set_option('expand_frame_repr', False)
-pd.options.display.max_seq_items = None
+# pd.set_option('display.max_columns', None)
+# pd.set_option('display.max_rows', None)
+# pd.set_option('display.width', 1000)
+# pd.set_option('expand_frame_repr', True)
+# pd.options.display.max_seq_items = None
+# pd.set_option('display.max_colwidth', None)
+# pd.set_option('display.colheader_justify', 'center')
 
-data = pd.read_excel("data/Advertising Sample.xlsx")
+pd.set_option('display.max_colwidth', -1)
+
+data = pd.read_excel("Market-Mix-Modelling\data\Advertising Sample.xlsx")
 data.head()
+data.columns
 
 
 
 
 
 
-
-
-# https://forecastegy.com/posts/implementing-uber-marketing-mix-model-with-orbit/
-# https://www.thewindowsclub.com/how-to-enable-or-disable-win32-long-paths-in-windows-11-10
