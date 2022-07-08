@@ -1,4 +1,6 @@
+# pip install jax==0.3.13 https://whls.blob.core.windows.net/unstable/cuda111/jaxlib-0.3.7+cuda11.cudnn82-cp38-none-win_amd64.whl
 # pip install --upgrade git+https://github.com/google/lightweight_mmm.git
+
 
 import pandas as pd
 from lightweight_mmm import preprocessing, lightweight_mmm, plot, optimize_media
