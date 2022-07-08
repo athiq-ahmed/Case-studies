@@ -7,7 +7,14 @@ from lightweight_mmm import preprocessing, lightweight_mmm, plot, optimize_media
 import jax.numpy as jnp
 from sklearn.preprocessing import MaxAbsScaler
 from sklearn.metrics import mean_absolute_error
-from tabulate import tabulate
+import orbit
+from orbit.models import KTR
+
+from orbit.models import DLT
+from orbit.models.dlt import DLTFull
+from orbit.models.dlt import ETSFull, DLTMAP, DLTFull
+from orbit.models.lgt import LGTMAP, LGTFull, LGTAggregated
+from orbit.diagnostics.plot import plot_predicted_components
 
 # pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
@@ -85,3 +92,7 @@ scaler_y = MaxAbsScaler()
 media_data_train.loc[:, response_col] = scaler_y.fit_transform(media_data_train.loc[:, response_col].values.reshape(-1,1))
 
 media_names = media_data_raw.columns
+
+
+# Building the model
+

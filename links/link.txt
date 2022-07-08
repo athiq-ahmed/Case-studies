@@ -1,4 +1,8 @@
-Market-Mix-Modelling - https://forecastegy.com/posts/implementing-uber-marketing-mix-model-with-orbit/
+Market-Mix-Modelling
+https://forecastegy.com/posts/implementing-uber-marketing-mix-model-with-orbit/
+https://towardsdatascience.com/time-series-modeling-with-orbit-a38e03a2a4ea
+
+
 Mapping-tree-cover
 	Code: https://lnkd.in/eaY3XWXM
 	Paper: https://lnkd.in/e-rX8n9j
