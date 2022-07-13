@@ -113,5 +113,5 @@ mmm.fit(
     weekday_seasonality = True,
     seasonality_frequency = 365,
     seed = 1,
-    XLA_FLAGS=--xla_gpu_force_compilation_parallelism=1
+    # XLA_FLAGS=--xla_gpu_force_compilation_parallelism=1
 )
