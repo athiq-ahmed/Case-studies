@@ -5,6 +5,8 @@
 """
 The modeling approach is called Bayesian Time-Varying Coefficients (BTVC) and its available on Orbit, their forecasting package, as Kernel Time-Varying Regression.
 We will use Impressions as the features and Sales as the target.
+Impressions are how many times someone saw at least 50% of an ad. It can be the same person seeing it multiple times.
+
 """
 
 
@@ -16,7 +18,7 @@ from sklearn.preprocessing import MaxAbsScaler
 from sklearn.metrics import mean_absolute_error
 import orbit
 
-# from orbit.models import KTR
+from orbit.models import KTR
 # from orbit.models import DLT
 # from orbit.models.dlt import DLTFull
 # from orbit.models.dlt import ETSFull, DLTMAP, DLTFull
