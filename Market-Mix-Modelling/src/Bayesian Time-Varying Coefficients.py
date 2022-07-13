@@ -1,5 +1,12 @@
 # pip install jax==0.3.13 https://whls.blob.core.windows.net/unstable/cuda111/jaxlib-0.3.7+cuda11.cudnn82-cp38-none-win_amd64.whl
 # pip install --upgrade git+https://github.com/google/lightweight_mmm.git
+# orbit requires some installations - https://code.visualstudio.com/docs/cpp/config-mingw
+
+"""
+The modeling approach is called Bayesian Time-Varying Coefficients (BTVC) and its available on Orbit, their forecasting package, as Kernel Time-Varying Regression.
+We will use Impressions as the features and Sales as the target.
+"""
+
 
 
 import pandas as pd
@@ -8,13 +15,13 @@ import jax.numpy as jnp
 from sklearn.preprocessing import MaxAbsScaler
 from sklearn.metrics import mean_absolute_error
 import orbit
-from orbit.models import KTR
 
-from orbit.models import DLT
-from orbit.models.dlt import DLTFull
-from orbit.models.dlt import ETSFull, DLTMAP, DLTFull
-from orbit.models.lgt import LGTMAP, LGTFull, LGTAggregated
-from orbit.diagnostics.plot import plot_predicted_components
+# from orbit.models import KTR
+# from orbit.models import DLT
+# from orbit.models.dlt import DLTFull
+# from orbit.models.dlt import ETSFull, DLTMAP, DLTFull
+# from orbit.models.lgt import LGTMAP, LGTFull, LGTAggregated
+# from orbit.diagnostics.plot import plot_predicted_components
 
 # pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
@@ -95,4 +102,26 @@ media_names = media_data_raw.columns
 
 
 # Building the model
+ktr_ = KTR(
+    response_col = response_col,
+    date_col = date_col,
+    regressor_col = regressor_cols,
+    seed = 2022,
+    seasonality = [7],
+    estimator = 'pyro-svi', 
+    n_bootstrap_draws = 1e4,
+    num_steps = 301,
+    message = 100
+)
+
+ktr_.fit(media_data_train)
+predicted_df = ktr_.predict(media_data_test)
+
+# Estimating Media Effects
+ktr_.plot_regression_coefs(figsize=(10, 10), include_ci=True)
+
+# Estimating Return on Investment (ROI)
+contribution = scaler_y.inverse_transform(ktr_.get_regression_coefs().iloc[:, 1:] * media_data_full[regressor_cols])
+contribution = pd.DataFrame(contribution,columns=regressor_cols).sum(axis=0)
+roi = (contribution.sum(axis=0) / costs_raw.sum(axis=0)).clip(0)
 
